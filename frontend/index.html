@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Career Path Navigator</title>
+<link rel="stylesheet" href="styles.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+<script src="script.js" defer></script>
+</head>
+<body>
+<div id="scroll-bar"></div>
+<div class="loader" id="loader"><div class="lring"></div><div class="ltext" id="loader-text">Loading…</div><div class="ldots"><span></span><span></span><span></span></div></div>
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<!-- ══════════════════════ LANDING ══════════════════════ -->
+<div id="page-landing" class="page active landing">
+  <div class="blobs"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+  <nav class="navbar">
+    <div class="nav-logo" onclick="showPage('page-landing')">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="7" fill="none" stroke="#f0c060" stroke-width="1.5"/><path d="M8 20L8 8L14 8C17.3 8 19.5 10 19.5 13C19.5 16 17.3 18 14 18L10.5 18" stroke="#f0c060" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="20" r="1.8" fill="#f0c060"/></svg>
+      <span>Career Path Navigator</span>
+    </div>
+    <div class="nav-links"><a onclick="document.getElementById('feat-sec').scrollIntoView({behavior:'smooth'})">Features</a><a onclick="showPage('page-login')">Sign In</a></div>
+    <div class="nav-actions">
+      <button class="th-tog" id="theme-btn-land" onclick="toggleTheme()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+      <button class="btn btn-g btn-sm" onclick="showPage('page-login')">Sign in</button>
+      <button class="btn btn-p btn-sm" onclick="showPage('page-signup')">Get started</button>
+    </div>
+  </nav>
+  <section class="hero">
+    <div class="hero-badge afu"><div class="badge-dot"></div>AI-Powered Career Intelligence</div>
+    <h1 class="afu d1">Find your path.<br><span class="grad">Mind matters too.</span></h1>
+    <p class="afu d2">ML-powered career recommendations + mental health tracking, skill gap analysis, career quiz, job market data, and course recommendations — all in one platform.</p>
+    <div class="hero-btns afu d3">
+      <button class="btn btn-p btn-lg" onclick="showPage('page-signup')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        Start for free
+      </button>
+      <button class="btn btn-g btn-lg" onclick="showPage('page-login')">Sign in</button>
+    </div>
+    <div class="hero-stats afu d4">
+      <div><div class="hero-stat-val" data-count="10">0</div><div class="hero-stat-label">Career paths</div></div>
+      <div><div class="hero-stat-val" data-count="92">0</div><div class="hero-stat-label">% ML accuracy</div></div>
+      <div><div class="hero-stat-val" data-count="9">0</div><div class="hero-stat-label">New features</div></div>
+      <div><div class="hero-stat-val" data-count="3">0</div><div class="hero-stat-label">ML models</div></div>
+    </div>
+  </section>
+  <section class="features" id="feat-sec">
+    <div class="sec-label afu">Everything you need</div>
+    <div class="sec-title afu d1">9 powerful features.<br>One platform.</div>
+    <div class="feat-grid">
+      <div class="feat-card afu d1"><div class="feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f0c060" stroke-width="1.6" stroke-linecap="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg></div><h3>Skill Gap Radar</h3><p>Visual spider chart showing exactly where you are vs your target career's ideal profile.</p></div>
+      <div class="feat-card afu d2"><div class="feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f0c060" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div><h3>Career Profiles</h3><p>Detailed pages for all 10 careers — salary, companies, roadmap, education requirements.</p></div>
+      <div class="feat-card afu d3"><div class="feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f0c060" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h3>Job Market Data</h3><p>Live job counts, growth trends, and top hiring cities for every career path.</p></div>
+      <div class="feat-card afu d1"><div class="feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f0c060" stroke-width="1.6" stroke-linecap="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><h3>Course Recommendations</h3><p>Curated free and paid courses from Coursera, NPTEL, and Udemy based on your skill gaps.</p></div>
+      <div class="feat-card afu d2"><div class="feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f0c060" stroke-width="1.6" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><h3>Career Comparison</h3><p>Side-by-side comparison of any two careers — salary, demand, stress, growth, and skills.</p></div>
+      <div class="feat-card afu d3"><div class="feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f0c060" stroke-width="1.6" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><h3>Daily Check-in</h3><p>Track your mood and energy every day. Build a mental health calendar over time.</p></div>
+      <div class="feat-card afu d1"><div class="feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f0c060" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 15h0M12 15h0M17 15h0M7 11h0M12 11h0M17 11h0"/></svg></div><h3>Career Quiz</h3><p>10-question personality quiz that suggests your best career match based on your preferences.</p></div>
+      <div class="feat-card afu d2"><div class="feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f0c060" stroke-width="1.6" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><h3>Email OTP</h3><p>Secure login with email OTP. No password needed — just your email and a 6-digit code.</p></div>
+      <div class="feat-card afu d3"><div class="feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f0c060" stroke-width="1.6" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><h3>PDF Export</h3><p>Download your complete career analysis as a formatted PDF report — perfect for counsellors.</p></div>
+    </div>
+  </section>
+  <section style="text-align:center;padding:4rem 2rem 6rem;position:relative;z-index:1">
+    <h2 class="sec-title afu" style="max-width:600px;margin:0 auto 1.2rem">Ready to find your path?</h2>
+    <button class="btn btn-p btn-lg afu d1" onclick="showPage('page-signup')">Create free account</button>
+  </section>
+</div>
+
+<!-- ══════════════════════ LOGIN ══════════════════════ -->
+<div id="page-login" class="page">
+  <div class="blobs"><div class="blob b1"></div><div class="blob b2"></div></div>
+  <div class="auth-wrap">
+    <div class="auth-left">
+      <button class="btn btn-g btn-sm auth-back" onclick="showPage('page-landing')">← Back</button>
+      <div class="auth-card asc">
+        <h1>Welcome back</h1>
+        <p class="auth-sub">Sign in to your career dashboard.</p>
+        <div style="display:flex;gap:4px;background:var(--glass);border:1px solid var(--border);border-radius:10px;padding:4px;margin-bottom:1.4rem">
+          <button id="tab-pw" onclick="switchAuthTab('pw')" style="flex:1;padding:7px;border-radius:7px;border:none;cursor:pointer;font-family:Outfit,sans-serif;font-size:.83rem;font-weight:500;background:var(--gold);color:#0a0a0a;transition:all .2s">Password</button>
+          <button id="tab-otp" onclick="switchAuthTab('otp')" style="flex:1;padding:7px;border-radius:7px;border:none;cursor:pointer;font-family:Outfit,sans-serif;font-size:.83rem;font-weight:500;background:transparent;color:var(--text2);transition:all .2s">Email OTP</button>
+        </div>
+        <div id="panel-pw">
+          <form id="login-form" onsubmit="handleLogin(event)">
+            <div class="fg"><label class="fl">Username</label><div class="iw"><input class="fi" id="lu" type="text" placeholder="your_username" autocomplete="username" required/><span class="ii">👤</span></div></div>
+            <div class="fg"><label class="fl">Password</label><div class="iw"><input class="fi" id="lp" type="password" placeholder="••••••••" autocomplete="current-password" required/><span class="ii">🔒</span></div></div>
+            <div class="ferr" id="login-err"></div>
+            <button type="submit" class="btn btn-p btn-fw" style="margin-top:.6rem">Sign in</button>
+          </form>
+        </div>
+        <div id="panel-otp" style="display:none">
+          <div id="otp-step1">
+            <div class="fg"><label class="fl">Email address</label><div class="iw"><input class="fi" id="otp-email" type="email" placeholder="you@gmail.com"/><span class="ii">✉️</span></div></div>
+            <div class="ferr" id="otp-err1"></div>
+            <button class="btn btn-p btn-fw" onclick="sendOtp()" style="margin-top:.6rem">Send OTP</button>
+          </div>
+          <div id="otp-step2" style="display:none">
+            <div style="background:var(--gold-d);border:1px solid rgba(240,192,96,.2);border-radius:10px;padding:10px 14px;margin-bottom:.9rem;font-size:.82rem;color:var(--text2)"><span id="otp-sent-msg">OTP sent.</span></div>
+            <div id="dev-otp-box" style="display:none;background:var(--violet-d);border:1px solid rgba(139,92,246,.25);border-radius:10px;padding:10px 14px;margin-bottom:.9rem;text-align:center">
+              <div style="font-size:.72rem;color:var(--text3);margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.06em">Dev Mode OTP</div>
+              <div id="dev-otp-val" style="font-family:Syne,sans-serif;font-size:1.8rem;font-weight:700;letter-spacing:.15em;color:var(--violet)"></div>
+            </div>
+            <div class="fg"><label class="fl">6-digit OTP</label><input class="fi noi" id="otp-code" type="text" placeholder="123456" maxlength="6" style="text-align:center;font-size:1.2rem;letter-spacing:.2em;font-family:Syne,sans-serif"/></div>
+            <div class="ferr" id="otp-err2"></div>
+            <button class="btn btn-p btn-fw" onclick="verifyOtp()" style="margin-top:.4rem">Verify OTP</button>
+            <button class="btn btn-g btn-fw btn-sm" onclick="resetOtp()" style="margin-top:.5rem">← Different email</button>
+          </div>
+        </div>
+        <div class="auth-switch" style="margin-top:1.1rem">No account? <a onclick="showPage('page-signup')">Create one</a></div>
+      </div>
+    </div>
+    <div class="auth-right">
+      <div class="auth-spin"></div>
+      <div style="position:relative;z-index:1;text-align:center">
+        <svg width="52" height="52" viewBox="0 0 52 52" fill="none" style="margin:0 auto 1rem;display:block"><rect width="52" height="52" rx="13" fill="none" stroke="rgba(240,192,96,0.4)" stroke-width="1.5"/><path d="M14 38L14 14L26 14C32.6 14 36 17.8 36 24C36 30.2 32.6 34 26 34L19 34" stroke="#f0c060" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="37" cy="38" r="2.5" fill="#f0c060"/></svg>
+        <h2 style="font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:700;margin-bottom:.7rem">9 features.<br>One dashboard.</h2>
+        <p style="color:var(--text2);font-size:.88rem;line-height:1.7">Skill gap radar, career quiz, job market, PDF export, and more.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ SIGNUP ══════════════════════ -->
+<div id="page-signup" class="page">
+  <div class="blobs"><div class="blob b1"></div><div class="blob b3"></div></div>
+  <div class="auth-wrap">
+    <div class="auth-left">
+      <button class="btn btn-g btn-sm auth-back" onclick="showPage('page-landing')">← Back</button>
+      <div class="auth-card asc">
+        <h1>Create account</h1>
+        <p class="auth-sub">Start your personalised career journey today.</p>
+        <form id="signup-form" onsubmit="handleSignup(event)">
+          <div class="fg"><label class="fl">Username</label><div class="iw"><input class="fi" id="su" type="text" placeholder="choose_a_username" autocomplete="username" required/><span class="ii">👤</span></div></div>
+          <div class="fg"><label class="fl">Password <small style="color:var(--text3);font-weight:400">(min 6 chars)</small></label><div class="iw"><input class="fi" id="sp" type="password" placeholder="••••••••" autocomplete="new-password" required/><span class="ii">🔒</span></div></div>
+          <div class="ferr" id="signup-err"></div>
+          <button type="submit" class="btn btn-p btn-fw" style="margin-top:.6rem">Create account</button>
+        </form>
+        <div class="auth-switch">Already have an account? <a onclick="showPage('page-login')">Sign in</a></div>
+      </div>
+    </div>
+    <div class="auth-right">
+      <div class="auth-spin"></div>
+      <div style="position:relative;z-index:1;text-align:center">
+        <svg width="52" height="52" viewBox="0 0 52 52" fill="none" style="margin:0 auto 1rem;display:block"><rect width="52" height="52" rx="13" fill="none" stroke="rgba(139,92,246,0.4)" stroke-width="1.5"/><path d="M14 38L14 14L26 14C32.6 14 36 17.8 36 24C36 30.2 32.6 34 26 34L19 34" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="37" cy="38" r="2.5" fill="#8b5cf6"/></svg>
+        <h2 style="font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:700;margin-bottom:.7rem">Join thousands of students</h2>
+        <p style="color:var(--text2);font-size:.88rem;line-height:1.7">ML-powered career guidance personalised to your skills and mental state.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ APP SHELL ══════════════════════ -->
+<div id="page-app" class="page">
+  <div class="shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="sb-head">
+        <div class="sb-logo"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 12L3 4L8 4C10.2 4 11.5 5.4 11.5 7.5C11.5 9.6 10.2 11 8 11L5 11" stroke="#f0c060" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12.5" cy="12.5" r="1.2" fill="#f0c060"/></svg></div>
+        <span class="sb-name">CPN</span>
+      </div>
+      <button class="sb-toggle" onclick="toggleSidebar()">›</button>
+      <nav class="sb-nav">
+        <div class="sb-item active" data-sec="sec-dashboard" onclick="switchSec(this)"><span class="sb-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="18" y="3" width="4" height="18"/><rect x="10" y="8" width="4" height="13"/><rect x="2" y="13" width="4" height="8"/></svg></span><span class="sb-label">Dashboard</span></div>
+        <div class="sb-item" data-sec="sec-assess" onclick="switchSec(this)"><span class="sb-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span><span class="sb-label">Assessment</span></div>
+        <div class="sb-item" data-sec="sec-results" onclick="switchSec(this)"><span class="sb-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span><span class="sb-label">Results</span></div>
+        <div class="sb-item" data-sec="sec-skillgap" onclick="switchSec(this)"><span class="sb-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/></svg></span><span class="sb-label">Skill Gap</span></div>
+        <div class="sb-item" data-sec="sec-explorer" onclick="switchSec(this)"><span class="sb-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span><span class="sb-label">Explorer</span></div>
+        <div class="sb-item" data-sec="sec-compare" onclick="switchSec(this)"><span class="sb-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><span class="sb-label">Compare</span></div>
+        <div class="sb-item" data-sec="sec-quiz" onclick="switchSec(this)"><span class="sb-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span class="sb-label">Career Quiz</span></div>
+        <div class="sb-item" data-sec="sec-checkin" onclick="switchSec(this)"><span class="sb-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span><span class="sb-label">Daily Check-in</span></div>
+        <div class="sb-item" data-sec="sec-roadmap" onclick="switchSec(this)"><span class="sb-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg></span><span class="sb-label">Roadmap</span></div>
+        <div class="sb-item" data-sec="sec-chat" onclick="switchSec(this)"><span class="sb-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><span class="sb-label">AI Guide</span></div>
+        <div class="sb-item" data-sec="sec-history" onclick="switchSec(this)"><span class="sb-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><span class="sb-label">History</span></div>
+      </nav>
+      <div class="sb-bottom">
+        <div class="sb-item" data-sec="sec-settings" onclick="switchSec(this)"><span class="sb-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span><span class="sb-label">Settings</span></div>
+        <div class="sb-item" onclick="handleLogout()"><span class="sb-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></span><span class="sb-label">Sign out</span></div>
+      </div>
+    </aside>
+
+    <main class="main" id="main">
+
+      <!-- DASHBOARD -->
+      <section class="sec active" id="sec-dashboard">
+        <div class="topbar"><div><h2 id="dash-greeting">Good morning ✨</h2><p id="dash-sub">Your career intelligence overview</p></div><div class="topbar-r"><button class="th-tog" onclick="toggleTheme()" id="theme-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button><button class="btn btn-p btn-sm" onclick="switchSec(document.querySelector('[data-sec=sec-assess]'))">New Assessment</button></div></div>
+        <div class="g4" style="margin-bottom:1.4rem">
+          <div class="stat-card afu"><div class="sv2" id="d-analyses">—</div><div class="slb">Analyses run</div></div>
+          <div class="stat-card afu d1"><div class="sv2" id="d-top">—</div><div class="slb">Top career match</div></div>
+          <div class="stat-card afu d2"><div class="sv2" id="d-sentiment">—</div><div class="slb">Last sentiment</div></div>
+          <div class="stat-card afu d3"><div class="sv2" id="d-stress">—</div><div class="slb">Stress level</div></div>
+        </div>
+        <div class="g2" style="margin-bottom:1.4rem">
+          <div class="ch-card afu"><div class="ct">Sentiment Trend</div><div class="ch-w"><canvas id="trend-chart"></canvas></div></div>
+          <div class="ch-card afu d1"><div class="ct">Career Confidence</div><div class="ch-w"><canvas id="conf-chart"></canvas></div></div>
+        </div>
+        <!-- Job market quick view -->
+        <div class="card afu d2" style="margin-bottom:1.4rem">
+          <div class="ct">Live Job Market</div>
+          <div id="job-market-dash" class="g3" style="margin-top:.5rem"></div>
+        </div>
+        <div class="card afu d3">
+          <div class="ct">Latest Recommendations</div>
+          <div id="dash-recs"><div style="text-align:center;padding:2rem;color:var(--text3)"><p style="font-size:.9rem">Run your first assessment to see recommendations.</p><button class="btn btn-p btn-sm" style="margin-top:1rem" onclick="switchSec(document.querySelector('[data-sec=sec-assess]'))">Start Assessment</button></div></div>
+        </div>
+      </section>
+
+      <!-- ASSESSMENT -->
+      <section class="sec" id="sec-assess">
+        <div class="topbar"><div><h2>Career Assessment</h2><p>Complete all 5 steps for your recommendation</p></div><div class="topbar-r"><button class="btn btn-g btn-sm" onclick="loadDemo()">⚡ Demo fill</button></div></div>
+        <div class="assess">
+          <div class="stepper" id="stepper">
+            <div class="step-dot active" id="sd1">1</div><div class="step-line" id="sl1"></div>
+            <div class="step-dot" id="sd2">2</div><div class="step-line" id="sl2"></div>
+            <div class="step-dot" id="sd3">3</div><div class="step-line" id="sl3"></div>
+            <div class="step-dot" id="sd4">4</div><div class="step-line" id="sl4"></div>
+            <div class="step-dot" id="sd5">5</div>
+          </div>
+          <div class="sp active card" id="step1">
+            <div class="ct">Step 1 of 5 — Academic Performance</div>
+            <p style="color:var(--text2);font-size:.88rem;margin-bottom:1.5rem">Rate your academic performance (0 = very weak, 100 = excellent)</p>
+            <div class="g2">
+              <div><div class="sg"><div class="sh"><span class="sl">Mathematics</span><span class="sv" id="math-v">65</span></div><input type="range" id="math" min="0" max="100" value="65" oninput="upd(this)"/></div><div class="sg"><div class="sh"><span class="sl">Science</span><span class="sv" id="science-v">60</span></div><input type="range" id="science" min="0" max="100" value="60" oninput="upd(this)"/></div><div class="sg"><div class="sh"><span class="sl">English</span><span class="sv" id="english-v">65</span></div><input type="range" id="english" min="0" max="100" value="65" oninput="upd(this)"/></div></div>
+              <div><div class="sg"><div class="sh"><span class="sl">Arts</span><span class="sv" id="arts-v">50</span></div><input type="range" id="arts" min="0" max="100" value="50" oninput="upd(this)"/></div><div class="sg"><div class="sh"><span class="sl">Commerce</span><span class="sv" id="commerce-v">50</span></div><input type="range" id="commerce" min="0" max="100" value="50" oninput="upd(this)"/></div></div>
+            </div>
+            <div class="snav"><span></span><button class="btn btn-p" onclick="goStep(2)">Next: Skills →</button></div>
+          </div>
+          <div class="sp card" id="step2">
+            <div class="ct">Step 2 of 5 — Skills & Traits</div>
+            <p style="color:var(--text2);font-size:.88rem;margin-bottom:1.5rem">Rate your proficiency in each skill area</p>
+            <div class="g2">
+              <div><div class="sg"><div class="sh"><span class="sl">Coding / Programming</span><span class="sv" id="coding_skill-v">50</span></div><input type="range" id="coding_skill" min="0" max="100" value="50" oninput="upd(this)"/></div><div class="sg"><div class="sh"><span class="sl">Communication</span><span class="sv" id="communication-v">50</span></div><input type="range" id="communication" min="0" max="100" value="50" oninput="upd(this)"/></div><div class="sg"><div class="sh"><span class="sl">Creativity</span><span class="sv" id="creativity-v">50</span></div><input type="range" id="creativity" min="0" max="100" value="50" oninput="upd(this)"/></div></div>
+              <div><div class="sg"><div class="sh"><span class="sl">Analytical Thinking</span><span class="sv" id="analytical-v">50</span></div><input type="range" id="analytical" min="0" max="100" value="50" oninput="upd(this)"/></div><div class="sg"><div class="sh"><span class="sl">Leadership</span><span class="sv" id="leadership-v">50</span></div><input type="range" id="leadership" min="0" max="100" value="50" oninput="upd(this)"/></div><div class="sg"><div class="sh"><span class="sl">Stress Tolerance</span><span class="sv" id="stress_tolerance-v">50</span></div><input type="range" id="stress_tolerance" min="0" max="100" value="50" oninput="upd(this)"/></div></div>
+            </div>
+            <div class="snav"><button class="btn btn-g" onclick="goStep(1)">← Back</button><button class="btn btn-p" onclick="goStep(3)">Next: Interests →</button></div>
+          </div>
+          <div class="sp card" id="step3">
+            <div class="ct">Step 3 of 5 — Interests</div>
+            <p style="color:var(--text2);font-size:.88rem;margin-bottom:1.5rem">How strongly are you drawn to each area?</p>
+            <div class="g2">
+              <div><div class="sg"><div class="sh"><span class="sl">Technology & Computing</span><span class="sv" id="interest_tech-v">50</span></div><input type="range" id="interest_tech" min="0" max="100" value="50" oninput="upd(this)"/></div><div class="sg"><div class="sh"><span class="sl">Science & Research</span><span class="sv" id="interest_science-v">50</span></div><input type="range" id="interest_science" min="0" max="100" value="50" oninput="upd(this)"/></div></div>
+              <div><div class="sg"><div class="sh"><span class="sl">Arts & Design</span><span class="sv" id="interest_arts-v">50</span></div><input type="range" id="interest_arts" min="0" max="100" value="50" oninput="upd(this)"/></div><div class="sg"><div class="sh"><span class="sl">Business & Finance</span><span class="sv" id="interest_business-v">50</span></div><input type="range" id="interest_business" min="0" max="100" value="50" oninput="upd(this)"/></div></div>
+            </div>
+            <div class="snav"><button class="btn btn-g" onclick="goStep(2)">← Back</button><button class="btn btn-p" onclick="goStep(4)">Next: Journal →</button></div>
+          </div>
+          <div class="sp card" id="step4">
+            <div class="ct">Step 4 of 5 — Mental Health Journal</div>
+            <p style="color:var(--text2);font-size:.88rem;margin-bottom:1.5rem">Write freely about how you feel regarding your future. Powers the NLP sentiment analysis.</p>
+            <div class="fg"><label class="fl">Your thoughts <span style="color:var(--red)">*</span></label><textarea class="fi noi" id="journal" placeholder="e.g. I feel excited about technology but sometimes overwhelmed by the choices ahead..."></textarea><div class="ferr" id="journal-err"></div></div>
+            <div class="snav"><button class="btn btn-g" onclick="goStep(3)">← Back</button><button class="btn btn-p" onclick="goStep(5)">Next: Review →</button></div>
+          </div>
+          <div class="sp card" id="step5">
+            <div class="ct">Step 5 of 5 — Review & Analyse</div>
+            <div id="review-summary" style="background:var(--glass-s);border-radius:var(--r);padding:1.2rem;margin-bottom:1.5rem;font-size:.86rem;line-height:1.8;color:var(--text2)">Review details will appear here…</div>
+            <div class="snav"><button class="btn btn-g" onclick="goStep(4)">← Back</button><button class="btn btn-p btn-lg" id="analyse-btn" onclick="runAnalysis()">Analyse My Profile</button></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RESULTS -->
+      <section class="sec" id="sec-results">
+        <div class="topbar"><div><h2>Your Results</h2><p>ML predictions + mental health fusion</p></div><div class="topbar-r"><button class="btn btn-g btn-sm" onclick="exportPDF()">Export PDF</button><button class="btn btn-p btn-sm" onclick="switchSec(document.querySelector('[data-sec=sec-assess]'))">New Assessment</button></div></div>
+        <div id="results-empty" style="text-align:center;padding:4rem;color:var(--text3)"><p>Complete an assessment first.</p><button class="btn btn-p btn-sm" style="margin-top:1rem" onclick="switchSec(document.querySelector('[data-sec=sec-assess]'))">Start Assessment</button></div>
+        <div id="results-content" style="display:none">
+          <div class="advisory-box afu" id="advisory-text" style="margin-bottom:1.4rem"></div>
+          <div class="g2" style="margin-bottom:1.4rem">
+            <div class="card afu">
+              <div class="ct">Mental Health Analysis</div>
+              <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:1rem">
+                <div class="pol-ring"><svg viewBox="0 0 110 110" width="110" height="110"><circle class="pol-bg" cx="55" cy="55" r="46" stroke-dasharray="289" stroke-dashoffset="0"/><circle class="pol-fg" id="pol-fg" cx="55" cy="55" r="46" stroke-dasharray="289" stroke-dashoffset="289"/></svg><span class="pol-val" id="pol-val">—</span></div>
+                <div><div style="margin-bottom:.6rem"><span class="stress-ind s-low" id="stress-badge">—</span></div><p style="font-size:.82rem;color:var(--text2);line-height:1.6" id="sent-summary">—</p></div>
+              </div>
+            </div>
+            <div class="ch-card afu d1"><div class="ct">Raw Model Confidence</div><div class="ch-w"><canvas id="result-chart"></canvas></div></div>
+          </div>
+          <div class="g2">
+            <div class="card afu d1"><div class="ct">ML Career Predictions</div><div id="ml-recs"></div></div>
+            <div class="card afu d2"><div class="ct" style="color:var(--gold)">Fused Recommendations</div><p style="font-size:.78rem;color:var(--text3);margin-bottom:.9rem">Adjusted for your mental state</p><div id="fused-recs"></div></div>
+          </div>
+          <!-- Skill gap shortcut -->
+          <div class="card afu d3" style="margin-top:1.4rem">
+            <div class="ct">Quick Skill Gap Check</div>
+            <p style="font-size:.86rem;color:var(--text2);margin-bottom:1rem">Select a career to instantly see your skill gaps for it:</p>
+            <div style="display:flex;gap:.6rem;flex-wrap:wrap" id="quick-gap-btns"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILL GAP RADAR -->
+      <section class="sec" id="sec-skillgap">
+        <div class="topbar"><div><h2>Skill Gap Analyser</h2><p>See exactly where you stand vs your target career</p></div></div>
+        <div class="card" style="margin-bottom:1.4rem">
+          <div class="ct">Select Target Career</div>
+          <div style="display:flex;gap:.6rem;flex-wrap:wrap" id="gap-career-btns"></div>
+        </div>
+        <div id="gap-empty" style="text-align:center;padding:3rem;color:var(--text3)"><p>Select a career above to see your skill gap radar.</p></div>
+        <div id="gap-content" style="display:none">
+          <div class="g2" style="margin-bottom:1.4rem">
+            <div class="ch-card"><div class="ct" id="gap-career-title">Skill Gap Radar</div><div style="position:relative;height:320px"><canvas id="radar-chart"></canvas></div></div>
+            <div class="card">
+              <div class="ct">Top Skill Gaps</div>
+              <div id="gap-list"></div>
+              <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--border)">
+                <div class="ct">Overall Match</div>
+                <div style="font-family:Syne,sans-serif;font-size:2.5rem;font-weight:700" id="gap-match-pct">—</div>
+                <div style="font-size:.82rem;color:var(--text2)">profile match to target career</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="ct">Recommended Courses to Close Gaps</div>
+            <div id="courses-list" class="g2" style="margin-top:.5rem"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXPLORER -->
+      <section class="sec" id="sec-explorer">
+        <div class="topbar"><div><h2>Career Explorer</h2><p>Detailed profiles for all 10 career paths</p></div></div>
+        <div class="exp-filters">
+          <div class="srch-w"><input class="srch" id="exp-search" placeholder="Search careers…" oninput="filterCareers()"/><span class="srch-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span></div>
+          <div class="chip on" onclick="filterTag(this,'all')">All</div>
+          <div class="chip" onclick="filterTag(this,'Technology')">Technology</div>
+          <div class="chip" onclick="filterTag(this,'Science')">Science</div>
+          <div class="chip" onclick="filterTag(this,'Business')">Business</div>
+          <div class="chip" onclick="filterTag(this,'Creative')">Creative</div>
+          <div class="chip" onclick="filterTag(this,'People')">People</div>
+        </div>
+        <div class="exp-grid" id="exp-grid"></div>
+        <!-- Career detail modal -->
+        <div id="career-modal" style="display:none;position:fixed;inset:0;z-index:200;background:rgba(8,10,18,.9);backdrop-filter:blur(8px);overflow-y:auto;padding:2rem 1rem">
+          <div style="max-width:800px;margin:0 auto;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rx);padding:2rem;position:relative">
+            <button onclick="closeModal()" style="position:absolute;top:1rem;right:1rem;background:var(--glass);border:1px solid var(--border);border-radius:8px;padding:.4rem .8rem;cursor:pointer;color:var(--text2);font-size:.85rem">✕ Close</button>
+            <div id="modal-content"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPARE -->
+      <section class="sec" id="sec-compare">
+        <div class="topbar"><div><h2>Career Comparison</h2><p>Compare any two careers side by side</p></div></div>
+        <div class="card" style="margin-bottom:1.4rem">
+          <div class="ct">Select Two Careers to Compare</div>
+          <div class="g2" style="margin-top:.8rem">
+            <div><label class="fl">Career 1</label><select class="fi noi" id="compare-c1" onchange="runComparison()"><option value="">Select career…</option></select></div>
+            <div><label class="fl">Career 2</label><select class="fi noi" id="compare-c2" onchange="runComparison()"><option value="">Select career…</option></select></div>
+          </div>
+        </div>
+        <div id="compare-empty" style="text-align:center;padding:3rem;color:var(--text3)"><p>Select two careers above to compare them.</p></div>
+        <div id="compare-content" style="display:none">
+          <div class="g2" style="margin-bottom:1.4rem">
+            <div class="card" id="comp-card1"></div>
+            <div class="card" id="comp-card2"></div>
+          </div>
+          <div class="card"><div class="ct">Side-by-Side Comparison</div><div id="compare-table" style="margin-top:.5rem"></div></div>
+          <div class="ch-card" style="margin-top:1.4rem"><div class="ct">Salary Range Comparison</div><div class="ch-w"><canvas id="compare-chart"></canvas></div></div>
+        </div>
+      </section>
+
+      <!-- CAREER QUIZ -->
+      <section class="sec" id="sec-quiz">
+        <div class="topbar"><div><h2>Career Quiz</h2><p>10 questions to find your ideal career match</p></div></div>
+        <div id="quiz-start" class="card" style="text-align:center;padding:3rem">
+          <div style="font-size:3rem;margin-bottom:1rem">🎯</div>
+          <h3 style="font-family:Syne,sans-serif;font-size:1.3rem;margin-bottom:.7rem">Discover Your Career Match</h3>
+          <p style="color:var(--text2);max-width:400px;margin:0 auto 1.5rem;font-size:.9rem;line-height:1.7">Answer 10 personality-based questions. No sliders, no data — just your honest preferences.</p>
+          <button class="btn btn-p btn-lg" onclick="startQuiz()">Start Quiz</button>
+        </div>
+        <div id="quiz-body" style="display:none">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem">
+            <div style="font-size:.88rem;color:var(--text2)">Question <span id="q-num">1</span> of 10</div>
+            <div style="height:4px;flex:1;margin:0 1rem;background:var(--border);border-radius:2px;overflow:hidden"><div id="quiz-prog" style="height:100%;background:var(--gold);border-radius:2px;transition:width .3s;width:10%"></div></div>
+            <button class="btn btn-g btn-sm" onclick="resetQuiz()">Restart</button>
+          </div>
+          <div class="card" id="quiz-card" style="margin-bottom:1rem">
+            <h3 style="font-family:Syne,sans-serif;font-size:1.1rem;margin-bottom:1.5rem" id="quiz-question">—</h3>
+            <div id="quiz-options"></div>
+          </div>
+        </div>
+        <div id="quiz-results" style="display:none">
+          <div class="advisory-box" style="margin-bottom:1.4rem" id="quiz-advisory"></div>
+          <div class="g3" id="quiz-result-cards"></div>
+          <div style="text-align:center;margin-top:1.5rem"><button class="btn btn-g" onclick="resetQuiz()">Retake Quiz</button></div>
+        </div>
+      </section>
+
+      <!-- DAILY CHECK-IN -->
+      <section class="sec" id="sec-checkin">
+        <div class="topbar"><div><h2>Daily Check-in</h2><p>Track your mood and energy every day</p></div></div>
+        <div class="g2" style="margin-bottom:1.4rem">
+          <div class="card afu">
+            <div class="ct">Today's Check-in</div>
+            <div class="sg" style="margin-bottom:1.2rem"><div class="sh"><span class="sl">Mood</span><span class="sv" id="mood-v">5</span></div><input type="range" id="ci-mood" min="1" max="10" value="5" oninput="document.getElementById('mood-v').textContent=this.value"/><div style="display:flex;justify-content:space-between;font-size:.75rem;color:var(--text3);margin-top:.2rem"><span>😢 Terrible</span><span>😊 Great</span></div></div>
+            <div class="sg" style="margin-bottom:1.2rem"><div class="sh"><span class="sl">Energy Level</span><span class="sv" id="energy-v">5</span></div><input type="range" id="ci-energy" min="1" max="10" value="5" oninput="document.getElementById('energy-v').textContent=this.value"/><div style="display:flex;justify-content:space-between;font-size:.75rem;color:var(--text3);margin-top:.2rem"><span>😴 Exhausted</span><span>⚡ Energised</span></div></div>
+            <div class="fg"><label class="fl">One word to describe today</label><input class="fi noi" id="ci-word" placeholder="e.g. hopeful, stressed, motivated" maxlength="30"/></div>
+            <div class="fg"><label class="fl">Optional note</label><textarea class="fi noi" id="ci-note" placeholder="Any thoughts about your day?" style="min-height:80px"></textarea></div>
+            <button class="btn btn-p btn-fw" onclick="saveCheckin()">Save Check-in</button>
+          </div>
+          <div class="card afu d1">
+            <div class="ct">Mood Calendar</div>
+            <div id="mood-calendar" style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:.5rem"></div>
+            <div style="display:flex;gap:.8rem;margin-top:1rem;font-size:.75rem;color:var(--text3);flex-wrap:wrap">
+              <span style="display:flex;align-items:center;gap:.3rem"><span style="width:10px;height:10px;border-radius:2px;background:#34d399;display:inline-block"></span>Great (8-10)</span>
+              <span style="display:flex;align-items:center;gap:.3rem"><span style="width:10px;height:10px;border-radius:2px;background:#f0c060;display:inline-block"></span>OK (5-7)</span>
+              <span style="display:flex;align-items:center;gap:.3rem"><span style="width:10px;height:10px;border-radius:2px;background:#f87171;display:inline-block"></span>Low (1-4)</span>
+            </div>
+          </div>
+        </div>
+        <div class="card afu d2"><div class="ct">Recent Check-ins</div><div id="checkin-history" style="margin-top:.5rem"></div></div>
+      </section>
+
+      <!-- ROADMAP -->
+      <section class="sec" id="sec-roadmap">
+        <div class="topbar"><div><h2>Roadmap Builder</h2><p>Drag steps to build your career plan</p></div><div class="topbar-r"><button class="btn btn-g btn-sm" onclick="clearRoadmap()">Clear</button><button class="btn btn-p btn-sm" onclick="saveRoadmap()">Save</button></div></div>
+        <div class="rm-shell">
+          <div class="rm-panel"><div class="ct" style="margin-bottom:.8rem">Steps Library</div><div id="rm-library"></div></div>
+          <div class="rm-canvas" id="rm-canvas" ondragover="rmDragOver(event)" ondrop="rmDrop(event)" ondragleave="rmDragLeave(event)"><div class="rm-empty" id="rm-empty"><div class="rm-empty-ic"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".3"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/></svg></div><span>Drag steps here</span></div><div id="rm-nodes"></div></div>
+        </div>
+      </section>
+
+      <!-- AI GUIDE -->
+      <section class="sec" id="sec-chat">
+        <div class="topbar"><div><h2>AI Career Guide</h2><p>Ask anything about your career path</p></div></div>
+        <div class="chat-shell"><div class="chat-msgs" id="chat-msgs"></div><div class="chat-sugg" id="chat-sugg"></div><div class="chat-bar"><input class="chat-in" id="chat-input" placeholder="Ask me anything about your career…" onkeydown="if(event.key==='Enter')sendChat()"/><button class="btn btn-p" onclick="sendChat()">Send</button></div></div>
+      </section>
+
+      <!-- HISTORY -->
+      <section class="sec" id="sec-history">
+        <div class="topbar"><div><h2>History</h2><p>Past recommendation sessions</p></div></div>
+        <div id="history-list"><p style="color:var(--text3)">Loading…</p></div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section class="sec" id="sec-settings">
+        <div class="topbar"><div><h2>Settings</h2><p>Customise your experience</p></div></div>
+        <div class="set-sec afu"><h3>Appearance</h3>
+          <div class="set-row"><div><div class="set-lbl">Dark Mode</div><div class="set-dsc">Switch between dark and light themes</div></div><button class="tog on" id="dark-tog" onclick="toggleTheme()"></button></div>
+        </div>
+        <div class="set-sec afu d1"><h3>Email OTP Setup</h3>
+          <div class="set-row" style="flex-direction:column;align-items:flex-start;gap:.8rem">
+            <div><div class="set-lbl">Configure Gmail for OTP emails</div><div class="set-dsc">Currently in dev mode — OTP shown on screen. To enable real emails, add Flask-Mail config to app.py.</div></div>
+            <div style="background:var(--glass-s);border:1px solid var(--border);border-radius:var(--r);padding:1rem;font-size:.82rem;color:var(--text2);line-height:1.8;width:100%">
+              1. Run: <code style="background:var(--glass);padding:.1rem .4rem;border-radius:4px;color:var(--gold)">pip install flask-mail</code><br>
+              2. Open <code style="background:var(--glass);padding:.1rem .4rem;border-radius:4px;color:var(--gold)">backend/app.py</code><br>
+              3. Uncomment the Flask-Mail section and add your Gmail credentials<br>
+              4. Generate App Password at <a href="https://myaccount.google.com/apppasswords" target="_blank" style="color:var(--gold)">myaccount.google.com/apppasswords</a>
+            </div>
+          </div>
+        </div>
+        <div class="set-sec afu d2"><h3>Account</h3>
+          <div class="set-row"><div><div class="set-lbl">Sign Out</div><div class="set-dsc">End your current session</div></div><button class="btn btn-o btn-sm" onclick="handleLogout()">Sign out</button></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+</body>
+</html>
